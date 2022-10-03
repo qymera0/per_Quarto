@@ -1,0 +1,50 @@
+---
+title: "Quarto Computations"
+format: 
+  html:
+        df-print: paged
+---
+
+This dataset contains a subset of the fuel economy data from the EPA. Specifically, we use the `mpg` dataset from the **ggplot2** package.
+
+```{r}
+#| label: load-packages
+
+
+library(ggplot2)
+```
+
+The plots in @fig-mpg show the relationship... In @fig-mpg-1 the points... in @fig-mpg-2 the points...
+
+```{r}
+#| label: fig-mpg
+#| fig-cap: "Fig cap bla bla"
+#| fig-subcap:
+#|      - "Color by number of cylinders"
+#|      - "Color by engine displacements, in liters"
+#| layout-ncol: 2
+#| column: page
+
+ggplot(mpg, aes(x = hwy, y = cty, color = cyl)) +
+  geom_point(alpha = 0.5, size = 2) +
+  scale_color_viridis_c() +
+  theme_minimal()
+
+ggplot(mpg, aes(x = hwy, y = cty, color = displ)) +
+  geom_point(alpha = 0.5, size = 2) +
+  scale_color_viridis_c(option = "E") +
+  theme_minimal()
+
+```
+
+There are `r nrow(mpg)` observations on the data
+
+```{r}
+#| echo: false
+
+mean_city <- round(mean(mpg$cty), 2)
+
+mean_hwy <- round(mean(mpg$hwy), 2)
+```
+
+The average `r mean_city`, the other mean `r mean_hwy`
