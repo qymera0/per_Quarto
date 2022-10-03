@@ -1,0 +1,61 @@
+---
+title: "Python and R test"
+author: "Sam"
+format: html
+editor: visual
+---
+
+# LOAD PACKAGES
+
+## R
+
+```{r}
+#| label: LOADPACKAGES
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(reticulate)
+
+```
+
+## Python
+
+```{python}
+#| label: LOADLIBRARIES
+
+import numpy as np
+import seaborn as sns
+import matplotlib as mpl
+
+```
+
+## Python data load
+
+```{python}
+#| label: DATALOADING
+
+fmri = sns.load_dataset('fmri')
+
+```
+
+## R subset
+
+```{r}
+#| label: RSUBSET
+
+f1 <- subset(py$fmri, region == 'parietal')
+
+```
+
+## Plot at Python
+
+```{python}
+#| label: PLOT
+#| warning: false
+#| message: false
+
+sns.lmplot('timepoint', 'signal', data = r.f1)
+mpl.pyplot.show()
+
+```
